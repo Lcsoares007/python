@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="/static/js/tools.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/layout.css">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id = "main">
+                <div id = "header" >
+                    <h1 class = "cor">Sorveteria</h1>
+
+                </div>
+                <div id ="corpo">
+                    <div id = "cont01">
+                        <p>Total de picolés base água produzido hoje: </p>
+                        <p>Total de picolés base leite produzidos hoje: </p>
+                        <p>Total de potes produzidos hoje: </p>
+                        <p>Picolés a base de água vendidos hoje:</p>
+                        <p>Picolés a base de leite vendidos hoje: </p>
+                        <p>Potes 2l vendidos hoje: </p><br>
+                        <p>Para saber nossa localização basta clickar na imagem!!!!</p>
+                    </div>
+                    <div id = "cont02" >
+                        <form name ="myForm" action="buscar" onsubmit="return validar()" method="POST">
+                            <p><input type = 'text' name = 'produzidosPa' id= "agua"/><img src = "https://i.ytimg.com/vi/JxvwxZscbOY/maxresdefault.jpg" usemap = #workmap style = "float:right; width:600px; height:350px" > </p>
+                            <p><input type = 'text' name = 'produzidosPl'/></p>
+                            <p><input type = 'text' name = 'produzidosP'/></p>
+                            <p><input type = 'text' name= 'pAgua'/></p>
+                            <p><input type = 'text' name= 'pLeite'/></p>
+                            <p><input type = 'text' name= 'pote2l'/></p>
+                            <input type = "submit"/>
+                        </form>
+
+                    </div>
+                </div>
+                <div id = "footer" >
+                    <span>Feito por nós!!!!<br>Versão 1.0.0</span>
+                </div>
+            </div>
+                    <map name="workmap">
+                        <area shape="rect" coords="1,1,600,350" alt="Computer" href="https://www.google.com.br/maps/place/R.+Andr%C3%A9ia,+74+-+Parque+dos+Camargos,+Barueri+-+SP,+06436-070/@-23.539995,-46.8846695,3a,75y,182.17h,94.31t/data=!3m6!1e1!3m4!1skCAhAR3LvnMZ0YoaMwU6VA!2e0!7i13312!8i6656!4m13!1m7!3m6!1s0x94cf013f95434a95:0x9faaf62135f20792!2sR.+Andr%C3%A9ia,+74+-+Parque+dos+Camargos,+Barueri+-+SP,+06436-070!3b1!8m2!3d-23.5400813!4d-46.8847115!3m4!1s0x94cf013f95434a95:0x9faaf62135f20792!8m2!3d-23.5400813!4d-46.8847115" target="_blank">
+                    </map>
+</body>
+</html>
