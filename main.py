@@ -1,10 +1,16 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['POST','GET'])
 def root():
-    return  render_template('index.html')
+    if request.method == 'POST':
+        #return "retorno: "+request.form['pAgua']
+        return buscar(request.form['pAgua'], request.form['pLeite'], request.form['pote2l'], request.form['produzidosPa'], request.form['produzidosPl'], request.form['produzidosP'])
+    else:
+        return render_template('index.html')
+
+@app.route('/buscar')
 def buscar(pAgua, pLeite, pote2l, produzidosPa, produzidosPl, produzidosP):
         try:
             produzidosPl = int(produzidosPl)
@@ -23,8 +29,9 @@ def buscar(pAgua, pLeite, pote2l, produzidosPa, produzidosPl, produzidosP):
             if lucro < 0:
                return "Prejuizo de: ", str(lucro)
             else:
-            #    return "Lucro de: "
-                return "Lucro de: ", str(lucro), "</br>Custo de produção: ", str(custoProducao),'</br>Custo carreteiro: ', str(carreteiros)
+                #return str(lucro)
+                tupla =("Lucro de: "+ str(lucro), "Custo de produção: "+ str(custoProducao),'Custo carreteiro: '+ str(carreteiros))
+                return render_template('resultados.html', tupla=tupla)
         except:
             return NameError
 

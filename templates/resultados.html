@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='layout.css') }}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="header" style="color:white">
+        {% for tupla in tupla %}
+            {{tupla}}<br>
+        {% endfor %}
+    </div>
+    <div id="corpo">
+    </div>
+         
+    <div id="footer">
+        Oiii!!!!!!
+    </div>
+</body>
+</html>
