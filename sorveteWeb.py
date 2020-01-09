@@ -1,14 +1,11 @@
-import os
-import cherrypy
-import urllib.request
-class sorveteWeb():
-    @cherrypy.expose
-    def index(self):
-        page = urllib.request.urlopen("http://127.0.0.1:8080/static/index.html")
-        text = page.read().decode("utf8")
-        return text
-    @cherrypy.expose
-    def buscar(self, pAgua, pLeite, pote2l, produzidosPa, produzidosPl, produzidosP):
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route('/')
+def root():
+    return  render_template('index.html')
+def buscar(pAgua, pLeite, pote2l, produzidosPa, produzidosPl, produzidosP):
         try:
             produzidosPl = int(produzidosPl)
             produzidosP = int(produzidosP)
@@ -32,17 +29,5 @@ class sorveteWeb():
             return NameError
 
 
-#tutconf = os.path.join(os.path.dirname(__file__), 'tutorial.conf')
-#tutconf = '/tutorial.confg'
-if __name__=='__main__':
-    conf = {
-        '/': {
-            'tools.sessions.on': True,
-            'tools.staticdir.root': os.path.abspath(os.getcwd())
-        },
-        '/static': {
-            'tools.staticdir.on': True,
-            'tools.staticdir.dir': './public'
-        }
-    }
-    cherrypy.quickstart(sorveteWeb(), '/', conf)
+if __name__ == '__main__':
+    app.run(host='127.0.0.1', port=5000, debug=True)
