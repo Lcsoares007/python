@@ -29,15 +29,20 @@ def buscar(pAgua, pLeite, pote2l, produzidosPa, produzidosPl, produzidosP):
             carreteiros = float(0.4) * (pAgua * float(1.50)) + float(0.4) * (pLeite * float(2.00))
             lucro = float(totalVendido - carreteiros - custoProducao)
 
-            #grava resulado no bd
-            datastore_client = datastore.Client()
-            entity = datastore.Entity(key=datastore_client.key('results'))
-            entity.update({
-                'timestamp': datetime.datetime.now(),
-                'lucro': lucro,
-                'custoProducao' : custoProducao,
-                'custoCarreteiros' : carreteiros
-            })
+            #grava resultado no bd
+            try:
+                datastore_client = datastore.Client()
+                entity = datastore.Entity(key=datastore_client.key('results'))
+                entity.update({
+                    'timestamp': datetime.datetime.now(),
+                    'lucro': lucro,
+                    'custoProducao' : custoProducao,
+                    'custoCarreteiros' : carreteiros
+                })
+                datastore_client.put(entity)
+            except:
+                return "erro no bd"
+            #-------------------------------------------
 
             if lucro < 0:
                return "Prejuizo de: ", str(lucro)
@@ -46,7 +51,7 @@ def buscar(pAgua, pLeite, pote2l, produzidosPa, produzidosPl, produzidosP):
                 tupla =("Lucro de: "+ str(lucro), "Custo de produção: "+ str(custoProducao),'Custo carreteiro: '+ str(carreteiros))
                 return render_template('resultados.html', tupla=tupla)
         except:
-            return NameError
+            return "erro geral"
 
 
 if __name__ == '__main__':
