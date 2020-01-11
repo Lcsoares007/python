@@ -1,5 +1,7 @@
-from flask import Flask, render_template, request
+from datetime import datetime
 
+from flask import Flask, render_template, request
+from google.cloud import datastore
 app = Flask(__name__)
 
 @app.route('/', methods=['POST','GET'])
@@ -26,6 +28,17 @@ def buscar(pAgua, pLeite, pote2l, produzidosPa, produzidosPl, produzidosP):
             totalVendido = (pAgua * float(1.50)) + (pote2l * float(18.0)) + (pLeite * float(2.00))
             carreteiros = float(0.4) * (pAgua * float(1.50)) + float(0.4) * (pLeite * float(2.00))
             lucro = float(totalVendido - carreteiros - custoProducao)
+
+            #grava resulado no bd
+            datastore_client = datastore.Client()
+            entity = datastore.Entity(key=datastore_client.key('results'))
+            entity.update({
+                'timestamp': datetime.datetime.now(),
+                'lucro': lucro,
+                'custoProducao' : custoProducao,
+                'custoCarreteiros' : carreteiros
+            })
+
             if lucro < 0:
                return "Prejuizo de: ", str(lucro)
             else:
